@@ -152,9 +152,9 @@ def top(num_processes=5, interval=3):
             continue
         now = user + system
         diff = now - start
-        usage.add((diff, process))
+        usage.add((diff, process.pid, process))
 
-    for idx, (diff, process) in enumerate(reversed(sorted(usage))):
+    for idx, (diff, _, process) in enumerate(reversed(sorted(usage))):
         if num_processes and idx >= num_processes:
             break
         if not _get_proc_cmdline(process):
